@@ -1,0 +1,150 @@
+<!Doctype html>
+
+<html>
+  <head>
+
+    <title>Counter Test</title>
+    <link rel="stylesheet" href="app.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome/css/font-awesome.min.css">
+    
+    <style type="text/css">
+
+	
+	    .main-ctr{
+	    	margin: 50px auto;
+	    	padding-left:50px;
+	    	padding-right:50px;
+	    	padding-bottom:100px;
+	    }
+
+	    .validation-error{
+		    border-color: #e74c3c;
+		    color: #e74c3c;
+		    font-style: italic;
+		    font-size:12pt;
+		}
+
+
+		.validation-success{
+		    border-color: #18bc9c;
+		    color: #18bc9c;
+		}
+
+
+    </style>
+
+    <script src="js/angular.min.js"></script>
+    <script src="/app.js"></script>
+
+  </head>
+
+  	<body>
+    
+	    <div class="container" ng-app="mainApp">
+
+		    <div class="main-ctr" ng-controller="mainAppController" style="border:2px solid black">
+
+		    	<h1> Counter App </h1>
+
+		    	<br>
+		    	<br>
+
+		    	<form novalidate class="form-horizontal css-form" name="counterForm">
+
+				      	
+			      	<div class="col-sm-10">
+			        	<input type="text" name="title" class="form-control {{error.css}}" placeholder="Enter a Title......" ng-model="counterItem.addTitle" required>
+			        	<br>
+			        	<p ng-show="titleValid" class="validation-error"> Please input some text... </p>
+			      	</div>
+
+			      	<div class="col-sm-2">
+
+			      		<button type="button" class="btn btn-primary"  ng-click="addCounterForm(counterForm,counterItem)">Add</button>
+
+			      	</div>
+
+
+				    <br><br><br><br>
+
+				    <table class="table table-bordered table-condensed"> 
+
+			                <tbody>
+
+			                    <tr ng-repeat="(itemIndex, counterItem)  in counterItems" > <!-- ng-if="$index >= myIndex" -->
+			                       
+			                        <td> 
+			                        	<div class="col-sm-12">
+			                        		<button type="button" class="btn btn-sm btn-danger" ng-click="deleteCounterItem(itemIndex,counterItem.id)" > 
+			                        			<i  class="fa fa-times-circle fa-lg" aria-hidden="true"></i>  
+			                        		</button>
+										</div>
+			                        </td>
+
+			                        <td style="width:80%">
+			                        	<div class="col-sm-8">
+			                        		<input type="text" class="form-control input-sm no-border" placeholder="Title" ng-model="counterItem.title" readonly="readonly" style="font-weight:bold;font-size:12pt;"/>
+										</div>
+			                        </td>
+
+			                        <td>
+			                        	<div class="col-sm-12">
+			                        		<button class="btn btn-sm btn-default" type="button" ng-click="increment(counterItem,counterItem.id);">
+			                        			<i  class="fa fa-plus fa-lg" aria-hidden="true"></i> 
+			                        		</button>
+										</div>
+			                        </td>
+
+			                        <td >
+			                        	
+			                        	<div class="col-sm-12">
+			                        		<input type="text" class="form-control input-sm" ng-model="counterItem.count" readonly="readonly" style="width:50px;font-weight:bold;font-size:12pt;text-align: center">
+										</div>
+			                        </td>
+
+			                        <td>
+			                        	<div class="col-sm-12">
+			                        		<button class="btn btn-sm btn-default" type="button" ng-click="decrement(counterItem,counterItem.id);">
+			                        			<i  class="fa fa-minus fa-lg" aria-hidden="true"></i> 
+			                        		</button>
+										</div>
+
+			                          
+			                        </td>
+
+			                    </tr>
+
+			                </tbody>
+
+			                <tfoot>
+
+			                	<tr>
+			                		<th colspan="5"> &nbsp;</th>
+			                	</tr>
+
+			                	<tr>
+			                		<th></th>
+			                		<th style="font-size:14pt">TOTAL:</th>
+			                		<th></th>
+			                		<th style="text-align: center;font-size:14pt">{{total() + 0}}</th>
+			                		<th></th>
+			                	</tr>
+
+			                </tfoot>
+
+			        	</table>
+
+
+				  
+				</form>
+
+		    	
+
+		    </div>
+
+		</div>
+
+  	</body>
+
+</html>
